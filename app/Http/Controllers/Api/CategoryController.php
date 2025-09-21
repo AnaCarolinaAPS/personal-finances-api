@@ -49,7 +49,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name'        => 'sometimes|string|max:255',
+            'description' => 'nullable|string',
+            'is_income'   => 'boolean',
+            'is_active'   => 'boolean',
+            'hex_color'   => 'nullable|string|max:7',
+            'parent_id'   => 'nullable|exists:categories,id',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update($validated);
+
+        return response()->json($category);
     }
 
     /**
@@ -57,6 +69,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return response()->json(null, 204);
     }
 }
