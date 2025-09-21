@@ -14,7 +14,10 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('children')->whereNull('parent_id')->get();
-        return response()->json($categories);
+        // return response()->json($categories);
+        return response()->json([
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -32,7 +35,10 @@ class CategoryController extends Controller
 
         $category = Category::create($validated);
 
-        return response()->json($category, 201);
+        // return response()->json($category, 201);
+        return response()->json([
+            'category' => $category
+        ], 201);
     }
 
     /**
@@ -41,7 +47,10 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         $category = Category::with('children')->findOrFail($id);
-        return response()->json($category);
+        // return response()->json($category);
+        return response()->json([
+            'category' => $category
+        ]);
     }
 
     /**
@@ -61,7 +70,10 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($validated);
 
-        return response()->json($category);
+        // return response()->json($category);
+        return response()->json([
+            'category' => $category
+        ]);
     }
 
     /**
@@ -72,6 +84,9 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return response()->json(null, 204);
+        // return response()->json(null, 204);
+        return response()->json([
+            'success' => true
+        ], 200);
     }
 }
