@@ -21,4 +21,8 @@ class Account extends Model
         'is_active',
     ];
 
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }

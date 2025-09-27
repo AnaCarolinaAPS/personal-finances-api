@@ -21,5 +21,10 @@ class Currency extends Model
         'decimal_places',
         'is_active',
     ];
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
 }
 
