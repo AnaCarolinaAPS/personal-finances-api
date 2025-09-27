@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Currency extends Model
+class Account extends Model
 {
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -13,18 +15,14 @@ class Currency extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'code',
         'name',
-        'symbol',
-        'decimal_separator',
-        'thousand_separator',
-        'decimal_places',
+        'description',
+        'currency_id',
         'is_active',
     ];
 
-    public function accounts()
+    public function currency()
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsTo(Currency::class);
     }
 }
-
