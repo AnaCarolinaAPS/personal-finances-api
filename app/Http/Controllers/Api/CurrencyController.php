@@ -28,8 +28,8 @@ class CurrencyController extends Controller
             'code'               => 'required|string|size:3|unique:currencies,code',
             'name'               => 'required|string|max:255',
             'symbol'             => 'required|string|max:5',
-            'decimal_separator'  => 'nullable|string|in:.,,|size:1',
-            'thousand_separator' => 'nullable|string|in:.,, ,_|size:1',
+            'decimal_separator'  => 'nullable|string|regex:/^[\.,]$/',
+            'thousand_separator' => 'nullable|string|regex:/^[\., _]$/',
             'decimal_places'     => 'nullable|integer|min:0|max:8',
             'is_active'          => 'nullable|boolean',
         ]);
@@ -60,8 +60,8 @@ class CurrencyController extends Controller
             'code'               => 'sometimes|string|size:3|unique:currencies,code,' . $currency->id,
             'name'               => 'sometimes|string|max:255',
             'symbol'             => 'sometimes|string|max:5',
-            'decimal_separator'  => 'sometimes|string|in:.,,|size:1',
-            'thousand_separator' => 'sometimes|string|in:.,, ,_|size:1',
+            'decimal_separator'  => 'sometimes|string|regex:/^[\.,]$/',
+            'thousand_separator' => 'sometimes|string|regex:/^[\., _]$/',
             'decimal_places'     => 'sometimes|integer|min:0|max:8',
             'is_active'          => 'sometimes|boolean',
         ]);
