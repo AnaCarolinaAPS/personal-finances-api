@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RecurringTransaction extends Model
+class ScheduledTransaction extends Model
 {
-    use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +18,7 @@ class RecurringTransaction extends Model
         'amount',
         'currency_id',
         'category_id',
-        'is_active',
+        'recurring_transaction_id',
     ];
 
     public function currency()
@@ -34,8 +31,8 @@ class RecurringTransaction extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function scheduledTransactions()
+    public function recurringTransaction()
     {
-        return $this->hasMany(ScheduledTransaction::class);
+        return $this->belongsTo(RecurringTransaction::class, 'recurring_transaction_id');
     }
 }

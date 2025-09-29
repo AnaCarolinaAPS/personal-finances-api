@@ -31,5 +31,10 @@ class Currency extends Model
     {
         return $this->hasMany(RecurringTransaction::class);
     }
+
+    public function scheduledTransactions()
+    {
+        return $this->hasMany(ScheduledTransaction::class);
+    }
 }
 
