@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('amount', 15, 2);
             $table->foreignId('currency_id')->constrained('currencies')->restrictOnDelete(); // Erro ao apagar a moeda relacionada
             $table->foreignId('category_id')->constrained('categories')->restrictOnDelete(); // Erro ao apagar a categoria relacionada
-            $table->foreignId('recurring_transactions_id')->nullable()->constrained('recurring_transactions')->nullOnDelete(); // Nulo caso a recurring_transactions for excluída
+            $table->foreignId('recurring_transaction_id')->nullable()->constrained('recurring_transactions')->nullOnDelete(); // Nulo caso a recurring_transactions for excluída
             $table->timestamps();
         });
     }

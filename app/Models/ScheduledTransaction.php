@@ -18,7 +18,7 @@ class ScheduledTransaction extends Model
         'amount',
         'currency_id',
         'category_id',
-        'recurring_transactions_id',
+        'recurring_transaction_id',
     ];
 
     public function currency()
@@ -33,6 +33,6 @@ class ScheduledTransaction extends Model
 
     public function recurringTransaction()
     {
-        return $this->belongsTo(RecurringTransaction::class);
+        return $this->belongsTo(RecurringTransaction::class, 'recurring_transaction_id');
     }
 }

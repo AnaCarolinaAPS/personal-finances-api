@@ -27,17 +27,17 @@ class ScheduledTransactionController extends Controller
     {
         $validated = $request->validate([
             'due_date'                  => 'required|date',
-            'name'                      => 'required_without:recurring_transactions_id|string|max:255',
+            'name'                      => 'required_without:recurring_transaction_id|string|max:255',
             'description'               => 'nullable|string',
-            'amount'                    => 'required_without:recurring_transactions_id|numeric|min:0',
-            'currency_id'               => 'required_without:recurring_transactions_id|exists:currencies,id',
-            'category_id'               => 'required_without:recurring_transactions_id|exists:categories,id',
-            'recurring_transactions_id' => 'nullable|exists:recurring_transactions,id',
+            'amount'                    => 'required_without:recurring_transaction_id|numeric|min:0',
+            'currency_id'               => 'required_without:recurring_transaction_id|exists:currencies,id',
+            'category_id'               => 'required_without:recurring_transaction_id|exists:categories,id',
+            'recurring_transaction_id'  => 'nullable|exists:recurring_transactions,id',
         ]);
 
-        if (!empty($validated['recurring_transactions_id'])) {
+        if (!empty($validated['recurring_transaction_id'])) {
             //Pesquisa o RecurringTransaction, caso seja enviado do formulário
-            $recurring = RecurringTransaction::findOrFail($validated['recurring_transactions_id']);
+            $recurring = RecurringTransaction::findOrFail($validated['recurring_transaction_id']);
             // Preencher os campos a partir do modelo
             $validated['name']        = $recurring->name;
             $validated['amount']      = $recurring->amount;
@@ -74,7 +74,7 @@ class ScheduledTransactionController extends Controller
             'amount'                    => 'sometimes|numeric|min:0',
             'currency_id'               => 'sometimes|exists:currencies,id',
             'category_id'               => 'sometimes|exists:categories,id',
-            'recurring_transactions_id' => 'sometimes|exists:recurring_transactions,id',
+            'recurring_transaction_id'  => 'sometimes|exists:recurring_transactions,id',
         ]);
 
         $scheduled_transaction->update($validated);
