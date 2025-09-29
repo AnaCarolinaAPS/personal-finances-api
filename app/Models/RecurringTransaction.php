@@ -33,4 +33,9 @@ class RecurringTransaction extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scheduledTransactions()
+    {
+        return $this->hasMany(ScheduledTransaction::class);
+    }
 }
